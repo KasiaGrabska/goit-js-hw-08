@@ -1,5 +1,7 @@
+//importujemy bibliotekę lodash.throttle
 import throttle from 'lodash.throttle';
 
+//za pomocą tych zmiennych doastajemy się do formularza i jegi dzieci
 const form = document.querySelector('form');
 const emailInput = document.querySelector('input');
 const messageTextArea = document.querySelector('textarea');
