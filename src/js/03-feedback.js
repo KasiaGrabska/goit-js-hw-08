@@ -10,8 +10,8 @@ const messageTextArea = document.querySelector('textarea');
 // ta funkcja to zapisywanie danych do localStorage
 const saveToLocalStorage = throttle(() => {
   const formData = {
-    email: emailInput.value,
-    message: messageTextArea.value,
+    email: emailInput.value.trim(),
+    message: messageTextArea.value.trim(),
   };
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 }, 500);
@@ -34,10 +34,15 @@ form.addEventListener('input', saveToLocalStorage);
 
 form.addEventListener('submit', evt => {
   evt.preventDefault();
-  localStorage.removeItem('feedback-form-state');
+  const email = emailInput.value.trim();
+  const message = messageTextArea.value.trim();
+
+  if (email === '' || message === '') {
+    // Sprawdzenie czy pola są puste
+    alert('All fields must be completed!');
+    return;
+  }
   form.reset();
-  console.log('Submitted:', {
-    email: emailInput.value,
-    message: messageTextArea.value,
-  });
+  localStorage.removeItem('feedback-form-state');
+  console.log('Submitted:', { email, message });
 });
